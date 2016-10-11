@@ -1,3 +1,32 @@
-<h1>
-  {{title}}
-</h1>
+<header>
+	<nav class="navbar navbar-inverse">
+		<div class="navbar-header">
+			<a href="/" class="navbar-brand">angular2</a>
+		</div>
+	</nav>	
+</header>
+<main>
+<div class="row">
+	<div class="col-sm-4">
+		<ul class="list-group users-list">
+		<li class="list-group-item" *ngFor="let user of users" (click)="selectUser(user)"
+		[class.active]="user===activeuser">{{user.name}} ({{user.username}}).</li>
+		</ul>
+		
+	</div>
+	<div class="col-sm-8">
+		<div class="jumbotron" *ngIf="activeuser">
+			<h2>{{activeuser.name}} ({{activeuser.username}})</h2>
+		</div>
+		<div class="jumbotron" *ngIf!="activeuser">
+		<h1>
+ 			 {{title}}
+		</h1>
+		<p>{{message}}</p>
+		</div>
+	</div>
+</div>
+</main>
+<footer class="text-center">
+	copyright &copy; 2016
+</footer>
