@@ -16,10 +16,12 @@
 	</div>
 	<div class="col-sm-8">
 		<div class="jumbotron" *ngIf="activeuser">
-		<input type="text" name="name" class="form-control" [(ngModel)]="activeuser.name">
+
+
 			<h2>{{activeuser.name}} </h2>({{activeuser.username}})
+		<input type="text" name="name" class="form-control" [(ngModel)]="activeuser.name">
 		</div>
-		<div class="jumbotron" *ngIf!="activeuser">
+		<div class="jumbotron" *ngIf="!activeuser">
 		<h1>
  			 {{title}}
 		</h1>
