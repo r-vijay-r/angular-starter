@@ -16,7 +16,8 @@
 	</div>
 	<div class="col-sm-8">
 		<div class="jumbotron" *ngIf="activeuser">
-			<h2>{{activeuser.name}} ({{activeuser.username}})</h2>
+		<input type="text" name="name" class="form-control" [(ngModel)]="activeuser.name">
+			<h2>{{activeuser.name}} </h2>({{activeuser.username}})
 		</div>
 		<div class="jumbotron" *ngIf!="activeuser">
 		<h1>
