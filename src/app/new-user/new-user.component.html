@@ -1,0 +1,13 @@
+<form #form="ngForm" (ngSubmit)="onSubmit()" *ngIf="active">
+	<div class="form-group" [ngClass]="{'has-error':name.invalid && name.touched}">
+		<input type="text" name="name" [(ngModel)]="newUser.name" #name="ngModel" class="form-control" required placeholder="Name">
+		<span class="help-block" *ngIf="name.invalid && name.touched">Name is required to add new user</span>
+	</div>
+	<div class="form-group" [ngClass]="{'has-error':username.invalid && name.valid && username.touched}">
+		<input type="text" name="username" class="form-control" required [(ngModel)]="newUser.username" #username="ngModel" [readonly]="name.invalid" placeholder="Userame">
+		<span class="help-block" *ngIf="username.invalid && name.touched">Userame is required to add new user</span>
+	</div>
+	<button type="submit" class="btn tn-lg btn-block btn-primary" [disabled]="form.invalid">
+		Create User
+	</button>
+</form>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { User } from './shared/models/user';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -19,5 +20,8 @@ export class AppComponent {
   selectUser(user){
   	this.activeuser=user;
   	console.log(this.activeuser);
+  }
+  onUserCreated(event){
+    this.users.push(event.user);
   }
 }
