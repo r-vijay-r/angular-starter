@@ -4,3 +4,7 @@
 .users-list li{
 	cursor: pointer;
 }
+button{
+	border-radius: 20px;
+	float: right;
+}

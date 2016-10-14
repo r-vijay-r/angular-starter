@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input , Output, EventEmitter } from '@angular/core';
 import { User } from '../shared/models/user';
 
 @Component({
@@ -8,6 +8,10 @@ import { User } from '../shared/models/user';
 })
 export class UsersComponent implements OnInit {
 	@Input() user :User;
+	@Output() userUpdated = new EventEmitter();
+	onKey(){
+		this.userUpdated.emit({ user: this.user});
+	}
   constructor() { }
 
   ngOnInit() {

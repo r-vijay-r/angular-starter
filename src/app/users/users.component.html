@@ -1,4 +1,4 @@
 <div class="jumbotron" *ngIf="user">
 <h2>{{user.name}} </h2>({{user.username}})
-<input type="text" name="name" class="form-control" [(ngModel)]="user.name">
+<input type="text" name="name" class="form-control" [(ngModel)]="user.name" (keyup.enter)="onKey()"> 
 </div>
