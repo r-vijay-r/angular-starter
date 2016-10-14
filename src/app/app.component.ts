@@ -29,7 +29,7 @@ export class AppComponent {
       this.activeuser ={id:"not_set_error", name:"", username:""} ;
     }
   }
-  deleteEverything() {
+  deleteEverything(key: string) {
     this.items.remove();
     if(this.activeuser.id == key){
       this.activeuser = new User();
