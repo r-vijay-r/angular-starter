@@ -2,7 +2,9 @@
 <header>
 	<nav class="navbar navbar-inverse">
 		<div class="navbar-header">
-			<a href="/" class="navbar-brand">angular2</a>
+			<a href="index.html" class="navbar-brand">angular2</a>
+		</div>
+		<div class="navbar-header">
 		</div>
 	</nav>	
 </header>
@@ -10,13 +12,14 @@
 <div class="row">
 	<div class="col-sm-4">
 		<ul class="list-group users-list">
-		<li class="list-group-item" *ngFor="let user of users" (click)="selectUser(user)"
-		[class.active]="user===activeuser">{{user.name}} ({{user.username}}).</li>
+		<li class="list-group-item" *ngFor="let user of items | async" (click)="selectUser(user.$key, user.name, user.username)"
+		[class.active]="user===activeuser">{{user.name}} ({{user.username}}).
+      <button (click)="deleteItem(user.$key)">X</button></li><!--selectUser(user.$key,user.name,user.username)-->
 		</ul>
 		<app-new-user (userCreated)="onUserCreated($event)"></app-new-user>
 	</div>
 	<div class="col-sm-8">
-		<user-profile [user]="activeuser">Loading...</user-profile>
+		<user-profile [user]="activeuser" (userUpdated)="updateItem($event)">Loading...</user-profile>
 		<div class="jumbotron" *ngIf="!activeuser">
 		<h1>
  			 {{title}}
