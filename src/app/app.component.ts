@@ -10,7 +10,7 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 export class AppComponent {
   title = 'Welcome to the app!';
   message = `
-  Select a user from the list to change name of the user. Add new user, delete users, delete all users
+  Select a user from the list to change name of the user. Add new user, delete users, delete all users, click on "Users" to reset
   `;
   items:FirebaseListObservable<any[]>;
   activeuser: User;
@@ -42,5 +42,12 @@ export class AppComponent {
   }
   onUserCreated(event){
    this.items.push({ name: event.user.name ,username: event.user.username});
+  }
+  reset(){
+    if(this.activeuser.id == "not_set_error"){
+    }else{
+      this.activeuser = new User();
+      this.activeuser ={id:"not_set_error", name:"", username:""} ;
+    }
   }
 }
