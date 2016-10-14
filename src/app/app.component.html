@@ -11,7 +11,7 @@
 <main>
 <div class="row">
 	<div class="col-sm-4">
-      Users<button class="deleteUser" (click)="deleteEverything(activeuser.key)">X</button>
+      Users<button class="deleteUser" (click)="deleteEverything()">X</button>
 		<ul class="list-group users-list" style="margin-top: 10px;">
 		<li class="list-group-item"  *ngFor="let user of items | async" (click)="selectUser(user.$key, user.name, user.username)"
 		[class.active]="user===activeuser">{{user.name}} ({{user.username}}).
