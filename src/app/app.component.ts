@@ -31,6 +31,10 @@ export class AppComponent {
   }
   deleteEverything() {
     this.items.remove();
+    if(this.activeuser.id == key){
+      this.activeuser = new User();
+      this.activeuser ={id:"not_set_error", name:"", username:""} ;
+    }
   }
   selectUser(key: string, name:string, username: string){
     this.activeuser={id: key, name:name, username:username};
