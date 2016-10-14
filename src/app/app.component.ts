@@ -10,10 +10,7 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 export class AppComponent {
   title = 'Welcome to the app!';
   message = `
-  Select a user from the list to change name of the user.<br>
-  Add new user <br>
-  Delete users
-  Delete all users
+  Select a user from the list to change name of the user. Add new user, delete users, delete all users
   `;
   items:FirebaseListObservable<any[]>;
   activeuser: User;
