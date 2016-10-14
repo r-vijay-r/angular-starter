@@ -11,16 +11,19 @@
 <main>
 <div class="row">
 	<div class="col-sm-4">
-		<ul class="list-group users-list">
-		<li class="list-group-item" *ngFor="let user of items | async" (click)="selectUser(user.$key, user.name, user.username)"
+      Users<button class="deleteUser" (click)="deleteEverything()">X</button>
+		<ul class="list-group users-list" style="margin-top: 10px;">
+		<li class="list-group-item"  *ngFor="let user of items | async" (click)="selectUser(user.$key, user.name, user.username)"
 		[class.active]="user===activeuser">{{user.name}} ({{user.username}}).
-      <button (click)="deleteItem(user.$key)">X</button></li><!--selectUser(user.$key,user.name,user.username)-->
+      <button class="deleteUser" (click)="deleteItem(user.$key)">X</button></li>
 		</ul>
 		<app-new-user (userCreated)="onUserCreated($event)"></app-new-user>
 	</div>
 	<div class="col-sm-8">
+		<div class="jumbotron" *ngIf=" activeuser.id!='not_set_error'">
 		<user-profile [user]="activeuser" (userUpdated)="updateItem($event)">Loading...</user-profile>
-		<div class="jumbotron" *ngIf="!activeuser">
+		</div>
+		<div class="jumbotron" *ngIf=" activeuser.id == 'not_set_error'">
 		<h1>
  			 {{title}}
 		</h1>

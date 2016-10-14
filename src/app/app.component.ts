@@ -14,6 +14,7 @@ export class AppComponent {
   activeuser: User;
   constructor(af: AngularFire) {
     this.items = af.database.list('/UserList');
+    this.activeuser ={id:"not_set_error", name:"", username:""} ;
   }
 
   updateItem(event) {
@@ -21,22 +22,19 @@ export class AppComponent {
   }
   deleteItem(key: string) {    
     this.items.remove(key); 
+    if(this.activeuser.id == key){
+      this.activeuser = new User();
+      this.activeuser ={id:"not_set_error", name:"", username:""} ;
+    }
   }
   deleteEverything() {
     this.items.remove();
   }
   selectUser(key: string, name:string, username: string){
-   // this.activeuser.id=key;
     this.activeuser={id: key, name:name, username:username};
     console.log(this.activeuser.name);
-  	//console.log(this.activeuser);
   }
   onUserCreated(event){
    this.items.push({ name: event.user.name ,username: event.user.username});
   }
-  conso(key: string, name:string){
-    console.log(key);
-    console.log(name);
-  }
-
 }

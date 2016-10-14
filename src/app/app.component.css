@@ -4,7 +4,7 @@
 .users-list li{
 	cursor: pointer;
 }
-button{
+.deleteUser{
 	border-radius: 20px;
 	float: right;
 }
