@@ -12,7 +12,6 @@ export class NewUserComponent implements OnInit {
 	active :boolean=true;
 	onSubmit(){
 		this.userCreated.emit({ user : this.newUser});
-		console.log(this.newUser);
 		this.newUser = new User();
 		this.active=false;
 		setTimeout(()=>this.active=true,0);

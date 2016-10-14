@@ -31,14 +31,14 @@ export class AppComponent {
   }
   deleteEverything() {
     this.items.remove();
-    if(this.activeuser.id != "not_set_error"){
+    if(this.activeuser.id == "not_set_error"){
+    }else{
       this.activeuser = new User();
       this.activeuser ={id:"not_set_error", name:"", username:""} ;
     }
   }
   selectUser(key: string, name:string, username: string){
     this.activeuser={id: key, name:name, username:username};
-    console.log(this.activeuser.name);
   }
   onUserCreated(event){
    this.items.push({ name: event.user.name ,username: event.user.username});
