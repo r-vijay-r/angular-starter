@@ -8,3 +8,16 @@
 	border-radius: 20px;
 	float: right;
 }
+.user-list-group-reset:hover{
+	box-shadow: 0 2px 0 rgba(0,0,0,0.2); 
+}
+.logout{
+	margin-top: 17px;
+}
+.logout-container{
+	float: right;
+	margin-right: 30px;
+}
+.footer{
+	margin-top: 10px;
+}

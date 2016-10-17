@@ -4,35 +4,45 @@
 		<div class="navbar-header">
 			<a href="index.html" class="navbar-brand">angular2</a>
 		</div>
-		<div class="navbar-header">
+		<div class="navbar-header logout-container" *ngIf="(af.auth | async)">
+			<button class="logout" (click)= "af.auth.logout()">
+			    Logout
+			</button>
 		</div>
 	</nav>	
 </header>
 <main>
-<div class="row">
-	<div class="col-sm-4">
-      <span class="list-group" (click)="reset()">Users</span><button class="deleteUser" (click)="deleteEverything()">X</button>
-		<ul class="list-group users-list" style="margin-top: 10px;">
-		<li class="list-group-item"  *ngFor="let user of items | async" (click)="selectUser(user.$key, user.name, user.username)"
-		[class.active]="user===activeuser">{{user.name}} ({{user.username}}).
-      <button class="deleteUser" (click)="deleteItem(user.$key)">X</button></li>
-		</ul>
-		<app-new-user (userCreated)="onUserCreated($event)"></app-new-user>
-	</div>
-	<div class="col-sm-8">
-		<div class="jumbotron" *ngIf=" activeuser.id!='not_set_error'">
-		<user-profile [user]="activeuser" (userUpdated)="updateItem($event)">Loading...</user-profile>
+	<div  *ngIf="(af.auth | async)">
+		<div class="row">
+			<div class="col-sm-4">
+		    	<span class="user-list-group-reset" (click)="reset()">Users</span><button class="deleteUser" (click)="deleteEverything()">X</button>
+				<ul class="list-group users-list" style="margin-top: 10px;">
+					<li class="list-group-item"  *ngFor="let user of items | async" (click)="selectUser(user.$key, user.name, user.username)"
+					[class.active]="user.$key==activeuser.id">{{user.name}} ({{user.username}}).
+		      		<button class="deleteUser" (click)="deleteItem(user.$key)">X</button></li>
+				</ul>
+				<app-new-user (userCreated)="onUserCreated($event)"></app-new-user>
+			</div>
+			<div class="col-sm-8">
+				<div class="jumbotron" *ngIf=" activeuser.id!='not_set_error'">
+				<user-profile [user]="activeuser" (userUpdated)="updateItem($event)">Loading...</user-profile>
+				</div>
+				<div class="jumbotron" *ngIf=" activeuser.id == 'not_set_error'">
+				<h1>
+		 			 {{title}}
+				</h1>
+				<p>{{message}}</p>
+				</div>
+			</div>
 		</div>
-		<div class="jumbotron" *ngIf=" activeuser.id == 'not_set_error'">
-		<h1>
- 			 {{title}}
-		</h1>
-		<p>{{message}}</p>
-		</div>
 	</div>
-</div>
+	<div  *ngIf="!(af.auth | async)" class="text-center">
+		<button  (click)= "af.auth.login()">
+		    Login with Google
+		</button>
+	</div>
 </main>
-<footer class="text-center">
+<footer class="text-center footer">
 	copyright &copy; 2016
 </footer>
 </div>

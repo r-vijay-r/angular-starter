@@ -14,7 +14,7 @@ export class AppComponent {
   `;
   items:FirebaseListObservable<any[]>;
   activeuser: User;
-  constructor(af: AngularFire) {
+  constructor(public af: AngularFire) {
     this.items = af.database.list('/UserList');
     this.activeuser ={id:"not_set_error", name:"", username:""} ;
   }
@@ -25,7 +25,6 @@ export class AppComponent {
   deleteItem(key: string) {    
     this.items.remove(key); 
     if(this.activeuser.id == key){
-      this.activeuser = new User();
       this.activeuser ={id:"not_set_error", name:"", username:""} ;
     }
   }
@@ -33,7 +32,6 @@ export class AppComponent {
     this.items.remove();
     if(this.activeuser.id == "not_set_error"){
     }else{
-      this.activeuser = new User();
       this.activeuser ={id:"not_set_error", name:"", username:""} ;
     }
   }
@@ -46,7 +44,6 @@ export class AppComponent {
   reset(){
     if(this.activeuser.id == "not_set_error"){
     }else{
-      this.activeuser = new User();
       this.activeuser ={id:"not_set_error", name:"", username:""} ;
     }
   }
