@@ -4,20 +4,29 @@
 .users-list li{
 	cursor: pointer;
 }
-.deleteUser{
-	border-radius: 20px;
-	float: right;
-}
 .user-list-group-reset:hover{
 	box-shadow: 0 2px 0 rgba(0,0,0,0.2); 
-}
-.logout{
-	margin-top: 17px;
-}
-.logout-container{
-	float: right;
-	margin-right: 30px;
+	cursor: pointer;
 }
 .footer{
 	margin-top: 10px;
+}
+.login{
+	text-align: center;
+	margin-top: 10px;
+}
+.login-text{
+	margin-top: 0px;
+	font-style: bold;
+}
+.example-fill-remaining-space {
+  flex: 1 1 auto;
+}
+md-toolbar{
+	margin-bottom: 8px;
+}
+.removebtn{
+	float: right;
+	padding-top: 0px;
+	margin-top: 0px;
 }
