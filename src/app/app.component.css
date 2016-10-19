@@ -5,7 +5,6 @@
 	cursor: pointer;
 }
 .user-list-group-reset:hover{
-	box-shadow: 0 2px 0 rgba(0,0,0,0.2); 
 	cursor: pointer;
 }
 .footer{
@@ -29,4 +28,65 @@ md-toolbar{
 	float: right;
 	padding-top: 0px;
 	margin-top: 0px;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.secondary {
+  color: rgba(0,0,0,0.54);
+}
+
+[md-fab] {
+  position: absolute;
+  right: 3%;
+  top: 34px;
+  z-index: 1;
+}
+
+md-sidenav-layout {
+  background: rgba(0,0,0,0.03);
+}
+
+md-input {
+  margin: 8px 0;
+  width: 100%;
+}
+
+md-radio-button, md-checkbox {
+  margin: 16px 8px;
+}
+
+.form {
+  display: flex;
+}
+
+.form md-card {
+  flex-grow: 1;
+}
+
+md-card {
+  width: 400px;
+  box-sizing: border-box;
+  margin: 16px;
+}
+
+.card-container {
+  display: flex;
+  flex-flow: row wrap;
+}
+.active{
+	background-color: #ffd699;
+}
+.user-card:hover{
+	cursor: pointer;
+}
+.text-center{
+	text-align: center;
+}
+li{
+	padding: 5px;
+	margin: 5px;
 }

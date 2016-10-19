@@ -1,53 +1,118 @@
-<div style="margin:8px;">
-<md-toolbar color="primary">
-	<button md-icon-button>
-		<md-icon>menu</md-icon>
-	</button>
-	<span color="white">
-		angular2
-	</span>
-	<span class="example-fill-remaining-space"></span>
-	<span *ngIf="(af.auth | async)">
-		<button md-icon-button  (click)= "af.auth.logout()" >
-		    <md-icon class="md-24">exit_to_app</md-icon>
-		</button>
-	</span>
-</md-toolbar>
-<main>
-	<div  *ngIf="(af.auth | async)">
-		<div class="row">
-			<div class="col-sm-4">
-		    	<span class="user-list-group-reset" (click)="reset()">Users</span>
-		    	<button md-icon-button class="removebtn" (click)="deleteEverything()">
-		    		<md-icon class="md-24">delete_sweep</md-icon>
-		    	</button>
-				<ul class="list-group users-list" style="margin-top: 10px;">
-					<li class="list-group-item"  *ngFor="let user of items | async" (click)="selectUser(user.$key, user.name, user.username)"
-					[class.active]="user.$key==activeuser.id">{{user.name}} ({{user.username}}).
-		      		<button md-icon-button class="removebtn" (click)="deleteItem(user.$key)"><md-icon class="md-24">delete</md-icon></button></li>
-				</ul>
-				<app-new-user (userCreated)="onUserCreated($event)"></app-new-user>
-			</div>
-			<div class="col-sm-8">
-				<div class="jumbotron" *ngIf=" activeuser.id!='not_set_error'">
-				<user-profile [user]="activeuser" (userUpdated)="updateItem($event)">Loading...</user-profile>
-				</div>
-				<div class="jumbotron" *ngIf=" activeuser.id == 'not_set_error'">
-				<h1>
-		 			 {{title}}
-				</h1>
-				<p>{{message}}</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div  *ngIf="!(af.auth | async)" class="text-center">
-		<button md-raised-button color="accent" (click)= "af.auth.login()">
-		    <span class="login-text">Login with Google</span>
-		</button>
-	</div>
-</main>
-<footer class="text-center footer">
-	copyright &copy; 2016
-</footer>
-</div>
+<md-sidenav-layout fullscreen>
+  <md-toolbar color="primary">
+    <button md-icon-button (click)="sidenav.open()">
+      <md-icon>menu</md-icon>
+    </button>
+    
+    <span>
+      Manage Users
+    </span>
+    <span class="example-fill-remaining-space"></span>
+    <span *ngIf="(af.auth | async)">
+      <button md-icon-button  (click)= "af.auth.logout()" >
+          <md-icon class="md-24">exit_to_app</md-icon>
+      </button>
+    </span>
+  </md-toolbar>
+
+  <md-sidenav #sidenav>
+    <md-nav-list (click)="sidenav.close()">
+      <div  *ngIf="!(af.auth | async)" class="text-center">
+        <button md-raised-button color="accent" (click)= "af.auth.login()">
+         <span class="login-text">Login with Google</span>
+        </button>
+      </div>
+      <div *ngIf="(af.auth | async)">
+        <a md-list-item (click)="updateShowing = false">
+          <span md-line class="user-list-group-reset" (click)="reset()">Users</span>
+        </a>
+        <a>
+          <span md-line>
+            <button md-button (click)="deleteEverything()">
+              <md-icon class="md-24">delete_sweep</md-icon>
+              Delete all users
+            </button>
+          </span>
+        </a>
+        <a>
+          <span md-line>
+            <button md-button (click)="formShowing=!formShowing">
+              <md-icon>add</md-icon>Add new user
+            </button>
+          </span>
+        </a>
+        <ul class="list-group users-list" style="margin-top: 10px;">
+          <div (click)="updateShowing=!updateShowing">
+            <li class="list-group-item"  *ngFor="let user of items | async" 
+              (click)="selectUser(user.$key, user.name, user.username)">
+              <span md-line>
+                {{user.name}}
+                <button md-icon-button class="removebtn" (click)="deleteItem(user.$key)">
+                  <md-icon class="md-24">delete</md-icon>
+                </button>
+              </span>
+              <span md-line class="secondary">({{user.username}})</span>
+            </li>
+          </div>
+        </ul>
+      </div>
+    </md-nav-list>
+  </md-sidenav>
+  <div  *ngIf="!(af.auth | async)" class="text-center">
+    <button md-raised-button color="accent" (click)= "af.auth.login()">
+        <span class="login-text">Login with Google</span>
+    </button>
+  </div>
+  <div *ngIf="(af.auth | async)">
+    <div class="form" *ngIf="formShowing">
+      <md-card>
+        <md-card-title>Create new user</md-card-title>
+        <md-card-content>
+          <app-new-user (userCreated)="onUserCreated($event)"></app-new-user>
+        </md-card-content>
+         <md-card-actions align="end">
+          <button md-raised-button md-icon-button color="accent" (click)="formShowing = false">
+            <md-icon>close</md-icon> 
+          </button>
+        </md-card-actions>
+      </md-card>
+    </div>
+
+    <div class="form" *ngIf="updateShowing">
+      <md-card>
+        <md-card-title>Update user details</md-card-title>
+        <md-card-content>
+          <user-profile [user]="activeuser" (userUpdated)="updateItem($event)">Loading...</user-profile>
+        </md-card-content>
+         <md-card-actions align="end">
+          <div (click)="updateShowing = false">
+            <button md-raised-button md-icon-button color="accent" (click)="reset()">
+              <md-icon>close</md-icon> 
+            </button>
+          </div>
+        </md-card-actions>
+      </md-card>
+    </div>
+
+    <div class="card-container">
+      <md-card *ngFor="let user of items | async" (click)="selectUser(user.$key, user.name, user.username)"
+                [class.active]="updateShowing==true && user.$key==activeuser.id" class="user-card">
+        <div (click)="updateShowing=!updateShowing">
+          <img md-card-image [alt]="user.name">
+          <md-card-title>{{user.name}}</md-card-title>
+          <md-card-content class="secondary">
+            {{user.username}}
+          </md-card-content>
+          <md-card-actions align="end">
+            <button md-icon-button class="removebtn" (click)="deleteItem(user.$key)">
+              <md-icon class="md-24">delete</md-icon>
+            </button>
+          </md-card-actions>
+        </div>
+      </md-card>
+    </div>
+  </div>
+  <div class="text-center">
+    copyright &copy; 2016
+  </div>
+</md-sidenav-layout>
